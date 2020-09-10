@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 
 class WeatherViewModel: ViewModel() {
 
-    // state: weather for location
     private var _screenState = MutableLiveData(ScreenState())
     var screenState: LiveData<ScreenState> = _screenState
 
