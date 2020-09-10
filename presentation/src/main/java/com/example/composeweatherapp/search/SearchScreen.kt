@@ -1,11 +1,15 @@
-package com.example.composeweatherapp
+package com.example.composeweatherapp.search
 
+import android.widget.Space
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.RowScope.gravity
+import androidx.compose.foundation.layout.RowScope.weight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -16,8 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.composeweatherapp.search.SearchViewModel
+import com.example.composeweatherapp.entity.LocationWeather
 
 
 @Composable
@@ -43,21 +48,26 @@ fun SearchContent(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.background(color = Color.Yellow).fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
+        Text(
+            text = "Please enter city name for search",
+            style = MaterialTheme.typography.h6,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 16.dp)
+        )
         LocationWeatherSearcher(onSearchEvent = {
             onSearchWeather(it)
-        }, modifier = Modifier.background(color = Color.Green))
-        LocationWeatherResult(locationWeather = locationWeather)
-        Spacer(
-            modifier = Modifier.preferredHeight(20.dp).fillMaxWidth()
-                .background(color = Color.Cyan)
-        )
+        })
+        if (locationWeather.locationName.isNotEmpty()) {
+            LocationWeatherResult(locationWeather = locationWeather, modifier = Modifier.weight(3f))
+            Spacer(modifier = Modifier.weight(1f))
+        }
     }
 }
 
 @Composable
-fun LocationWeatherSearcher(onSearchEvent: (String) -> Unit, modifier: Modifier) {
+fun LocationWeatherSearcher(onSearchEvent: (String) -> Unit, modifier: Modifier = Modifier) {
     val searchText = remember { mutableStateOf("") }
     val submit = {
         onSearchEvent(searchText.value)
@@ -73,7 +83,7 @@ fun LocationWeatherSearcher(onSearchEvent: (String) -> Unit, modifier: Modifier)
             text = searchText.value, onTextChange = {
                 searchText.value = it
             },
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(12.dp).weight(3f)
         )
         SearchApplyButton(
             onClick = submit, text = "Search",
@@ -121,8 +131,20 @@ fun LocationWeatherResult(
     locationWeather: LocationWeather,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.gravity(Alignment.CenterVertically).background(color = Color.Blue)) {
-        Text(text = locationWeather.locationName)
-        Text(text = locationWeather.temperature.toString())
+    Column(horizontalGravity = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center,
+        modifier = modifier
+    ) {
+        Text(
+            text = "Such a lovely weather in ${locationWeather.locationName}!",
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = "Temperature is ${locationWeather.temperature} ℃",
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+            textAlign = TextAlign.Center
+        )
     }
 }

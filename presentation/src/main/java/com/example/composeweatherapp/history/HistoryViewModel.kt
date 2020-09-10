@@ -3,20 +3,66 @@ package com.example.composeweatherapp.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.composeweatherapp.LocationWeather
+import com.example.composeweatherapp.entity.LocationWeather
 
-class HistoryViewModel: ViewModel() {
+class HistoryViewModel : ViewModel() {
 
     // state: weather history
 //    private var _weatherHistory = MutableLiveData(listOf<LocationWeather>())
 
-   //Todo remove this stub data
-    private var _weatherHistory = MutableLiveData(listOf(
-        LocationWeather("Location 1", 10.0f),
-        LocationWeather("Location 2", 20.0f),
-        LocationWeather("Location 3", 30.0f),
-        LocationWeather("Location 4", 40.0f),
-        LocationWeather("Location 5", 50.0f),
-    ))
+    private fun randomTemp(): Int {
+        return (-10..30).random()
+    }
+
+    //Todo remove this stub data
+    private var _weatherHistory = MutableLiveData(
+        listOf(
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+            LocationWeather("Location 1", randomTemp()),
+            LocationWeather("Location 2", randomTemp()),
+            LocationWeather("Location 3", randomTemp()),
+            LocationWeather("Location 4", randomTemp()),
+            LocationWeather("Location 5", randomTemp()),
+        )
+    )
     var weatherHistory: LiveData<List<LocationWeather>> = _weatherHistory
 }

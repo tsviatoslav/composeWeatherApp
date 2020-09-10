@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeWeatherAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     WeatherActivityScreen(
                         weatherViewModel = weatherViewModel,
@@ -42,28 +41,13 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ComposeWeatherAppTheme {
-        Greeting("Android")
-    }
-}
-
-@Composable
 private fun WeatherActivityScreen(
     weatherViewModel: WeatherViewModel,
     searchViewModel: SearchViewModel,
     historyViewModel: HistoryViewModel
 ) {
     val screenState: ScreenState by weatherViewModel.screenState.observeAsState(
-        ScreenState(
-            ScreenState.Screen.SEARCH
-        )
+        weatherViewModel.screenState.value!!
     )
     WeatherScreen(
         screenState = screenState,
