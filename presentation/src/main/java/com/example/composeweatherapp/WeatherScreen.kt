@@ -28,7 +28,7 @@ fun WeatherScreen(
 ) {
     Column {
         TabsPanel(screenState = screenState, onNavigate = onNavigate)
-        Surface(Modifier.background(color = Color.LightGray)) {
+        Surface() {
             when (screenState.state) {
                 ScreenState.Screen.SEARCH -> {
                     SearchScreen(searchViewModel = searchViewModel)

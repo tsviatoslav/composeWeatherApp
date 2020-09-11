@@ -20,9 +20,9 @@ import com.example.composeweatherapp.ui.ComposeWeatherAppTheme
 
 class MainActivity : AppCompatActivity() {
 
-    val weatherViewModel by viewModels<WeatherViewModel>()
-    val searchViewModel by viewModels<SearchViewModel>()
-    val historyViewModel by viewModels<HistoryViewModel>()
+    private val weatherViewModel by viewModels<WeatherViewModel>()
+    private val searchViewModel by viewModels<SearchViewModel>()
+    private val historyViewModel by viewModels<HistoryViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
